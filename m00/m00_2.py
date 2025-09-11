@@ -11,17 +11,19 @@ class RandomAgent:
 def run_random_agent(episodes=5):
     env = gym.make("CartPole-v1", render_mode="human")
     agent = RandomAgent(env.action_space)
-
+    total_reward = 0
+    rewards = []
     for ep in range(episodes):
         obs, info = env.reset()
-        total_reward = 0
+        
         done = False
         while not done:
             action = agent.act(obs)
             obs, reward, terminated, truncated, info = env.step(action)
             total_reward += reward
             done = terminated or truncated
-        print(f"Episode {ep+1} reward: {total_reward}")
+            rewards.append(reward)
+        print(f"Episode {ep+1} reward: {reward}, total_reward: {total_reward}")
     
     env.close()
 

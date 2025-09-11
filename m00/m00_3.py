@@ -4,10 +4,9 @@ import matplotlib.pyplot as plt
 def run_and_log(episodes=100):
     env = gym.make("CartPole-v1")
     rewards = []
-
+    total_reward = 0
     for ep in range(episodes):
         obs, info = env.reset()
-        total_reward = 0
         done = False
         while not done:
             action = env.action_space.sample()
