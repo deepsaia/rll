@@ -10,16 +10,20 @@ import time
 
 def main():
     # Create the environment
-    env = FlappyBirdEnv(render_mode="human")
+    env = FlappyBirdEnv(render_mode="headless")
     
     # Load the trained model
     try:
         model = PPO.load("flappy_bird_ppo_best")
         print("Model loaded successfully!")
     except FileNotFoundError:
-        print("Could not find 'flappy_bird_ppo' model. Make sure you've trained it first.")
-        print("Run train_example.py to train a model.")
-        return
+        try:
+            # Fall back to final model
+            model = PPO.load("flappy_bird_ppo_final")
+            print("Loaded final model successfully!")
+        except FileNotFoundError:
+            print("Could not find either model. Check that training completed successfully.")
+            return
     except Exception as e:
         print(f"Error loading model: {e}")
         return
@@ -34,7 +38,7 @@ def main():
         total_scores = []
         
         while True:  # Continue until user closes window
-            action, _states = model.predict(obs)
+            action, _states = model.predict(obs, deterministic=True)
             obs, rewards, terminated, truncated, info = env.step(action)
             
             if terminated or truncated:

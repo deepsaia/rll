@@ -10,5 +10,6 @@ wheels/
 .venv
 uv.lock
 
-# zip files
+# os files
 *.zip
+*.log

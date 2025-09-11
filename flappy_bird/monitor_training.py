@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import re
 import time
+import os
 from IPython.display import clear_output
 
 def parse_log_file(log_file_path):
@@ -74,7 +75,7 @@ def plot_training_progress(log_file_path):
 if __name__ == "__main__":
     # Find the latest log file
     import glob
-    log_files = glob.glob("flappy_bird_training_*.log")
+    log_files = glob.glob("flappy_bird/flappy_bird_training_*.log")
     if log_files:
         latest_log = max(log_files, key=os.path.getctime)
         print(f"Monitoring {latest_log}")

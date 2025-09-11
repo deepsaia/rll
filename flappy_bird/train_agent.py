@@ -1,6 +1,6 @@
-# train_example.py
+# train_agent.py
 """
-Example of training an agent on the Flappy Bird environment with enhanced logging.
+Example of training an agent on the Flappy Bird environment with enhanced logging using only loguru.
 """
 
 import gymnasium as gym
@@ -10,7 +10,6 @@ from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.env_checker import check_env
 import time
 from loguru import logger
-from tqdm import tqdm
 import os
 
 from flappy_bird.flappy_bird_arcade import FlappyBirdEnv
@@ -20,67 +19,63 @@ logger.add("flappy_bird/flappy_bird_training_{time}.log", rotation="500 MB")
 
 # Custom callback for tracking episode rewards and other metrics
 class TrainingCallback(BaseCallback):
-    def __init__(self, verbose=0):
+    def __init__(self, total_timesteps, verbose=0):
         super().__init__(verbose)
         self.episode_rewards = []
-        self.episode_lengths = []
         self.current_episode_reward = 0
-        self.tqdm_progress = None
         self.best_mean_reward = -np.inf
-        
-    def _on_training_start(self) -> None:
-        # Initialize tqdm progress bar
-        total_steps = self.model.n_steps * self.model.n_epochs * (self.model.n_steps // self.model.n_steps + 1)
-        # Since we can't get num_timesteps from DummyVecEnv, let's just use the total timesteps parameter
-        self.tqdm_progress = tqdm(total=self.locals.get('total_timesteps', 100000), 
-                                 desc="Training Progress", unit="steps")
+        self.total_timesteps = total_timesteps
+        self.last_log_step = 0
+        self.log_interval = max(1000, total_timesteps // 100)  # Log at least 100 times during training
         
     def _on_step(self) -> bool:
         # Get reward from the most recent step
-        if hasattr(self.training_env, 'envs'):
-            # Vectorized environment case
+        if "rewards" in self.locals:
             rewards = self.locals['rewards']
             dones = self.locals['dones']
-        else:
-            # Single environment case
-            rewards = [self.locals['rewards']]
-            dones = [self.locals['dones']]
             
-        # Accumulate rewards and track completed episodes
-        for i in range(len(rewards)):
-            self.current_episode_reward += rewards[i]
-            if dones[i]:
-                self.episode_rewards.append(self.current_episode_reward)
-                self.episode_lengths.append(self.num_timesteps)
-                
-                # Log episode info
-                mean_reward = np.mean(self.episode_rewards[-100:]) if len(self.episode_rewards) >= 100 else np.mean(self.episode_rewards)
-                logger.info(f"Episode finished: Reward={self.current_episode_reward:.2f}, "
-                           f"Mean reward (last 100)={mean_reward:.2f}, Timestep={self.num_timesteps}")
-                
-                # Save best model
-                if mean_reward > self.best_mean_reward:
-                    self.best_mean_reward = mean_reward
-                    self.model.save("flappy_bird_ppo_best")
-                    logger.info(f"New best model saved with mean reward: {mean_reward:.2f}")
+            # Accumulate rewards and track completed episodes
+            for i in range(len(rewards)):
+                self.current_episode_reward += rewards[i]
+                if dones[i]:
+                    self.episode_rewards.append(self.current_episode_reward)
                     
-                self.current_episode_reward = 0
-                
-        # Update progress bar
-        if self.tqdm_progress:
-            self.tqdm_progress.update(1)
+                    # Log episode info
+                    mean_reward = np.mean(self.episode_rewards[-100:]) if len(self.episode_rewards) >= 100 else np.mean(self.episode_rewards)
+                    logger.info(f"Episode finished: Reward={self.current_episode_reward:.2f}, "
+                               f"Mean reward (last 100)={mean_reward:.2f}, Timestep={self.num_timesteps}")
+                    
+                    # Save best model
+                    if mean_reward > self.best_mean_reward:
+                        self.best_mean_reward = mean_reward
+                        self.model.save("flappy_bird_ppo_best")
+                        logger.info(f"New best model saved with mean reward: {mean_reward:.2f}")
+                        
+                    self.current_episode_reward = 0
+        
+        # Log training progress at regular intervals
+        if self.num_timesteps - self.last_log_step >= self.log_interval:
+            progress_percent = (self.num_timesteps / self.total_timesteps) * 100
+            if self.episode_rewards:
+                current_mean = np.mean(self.episode_rewards[-100:]) if len(self.episode_rewards) >= 100 else np.mean(self.episode_rewards)
+                logger.info(f"Training progress: {progress_percent:.1f}% | "
+                           f"Timestep: {self.num_timesteps:,}/{self.total_timesteps:,} | "
+                           f"Recent mean reward: {current_mean:.2f}")
+            else:
+                logger.info(f"Training progress: {progress_percent:.1f}% | "
+                           f"Timestep: {self.num_timesteps:,}/{self.total_timesteps:,} | "
+                           f"No episodes completed yet")
+                           
+            self.last_log_step = self.num_timesteps
             
         return True
     
     def _on_training_end(self) -> None:
-        if self.tqdm_progress:
-            self.tqdm_progress.close()
-            
         # Final summary
         if self.episode_rewards:
             final_mean_reward = np.mean(self.episode_rewards[-100:])
-            logger.info(f"Training completed! Final mean reward (last 100 episodes): {final_mean_reward:.2f}")
-            logger.info(f"Best mean reward achieved: {self.best_mean_reward:.2f}")
+            logger.success(f"Training completed! Final mean reward (last 100 episodes): {final_mean_reward:.2f}")
+            logger.success(f"Best mean reward achieved: {self.best_mean_reward:.2f}")
             logger.info(f"Total episodes completed: {len(self.episode_rewards)}")
 
 
@@ -94,6 +89,8 @@ def main():
         logger.success("Environment passed gymnasium's environment check")
     except Exception as e:
         logger.error(f"Environment check failed: {e}")
+    
+    total_timesteps = 100000
     
     # Set up the PPO agent
     model = PPO(
@@ -112,15 +109,16 @@ def main():
     )
     
     # Create callback instance
-    callback = TrainingCallback(verbose=1)
+    callback = TrainingCallback(total_timesteps=total_timesteps, verbose=1)
     
     # Log training parameters
     logger.info("Starting Flappy Bird training with following parameters:")
-    logger.info(f"Algorithm: PPO")
-    logger.info(f"Total timesteps: 100,000")
-    logger.info(f"Learning rate: 0.0003")
-    logger.info(f"Gamma: 0.99")
-    logger.info(f"Using {'GPU' if model.device.type == 'cuda' else 'CPU'} for training")
+    logger.info(f"Algorithm: [bold]PPO[/]")
+    logger.info(f"Total timesteps: [bold]{total_timesteps:,}[/]")
+    logger.info(f"Learning rate: [bold]{0.0003}[/]")
+    logger.info(f"Gamma: [bold]{0.99}[/]")
+    device_str = 'GPU' if model.device.type == 'cuda' else 'CPU'
+    logger.info(f"Using [bold]{device_str}[/] for training")
     
     # Start timer
     start_time = time.time()
@@ -129,7 +127,7 @@ def main():
         # Train the agent
         logger.info("Beginning training...")
         model.learn(
-            total_timesteps=100000,
+            total_timesteps=total_timesteps,
             callback=callback,
             tb_log_name="PPO"
         )

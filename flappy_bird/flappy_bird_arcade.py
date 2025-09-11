@@ -437,9 +437,18 @@ class FlappyBirdEnv(gym.Env):
         super().reset(seed=seed)
         
         if self.render_mode == "human":
+            # For human rendering mode, ensure the game window is properly initialized and reset
             if self.game_window is None:
                 self.game_window = FlappyBirdGame(SCREEN_WIDTH, SCREEN_HEIGHT, self.render_mode)
-            observation, info = self.game_window.reset()
+            # Reset the game window state directly instead of calling reset()
+            self.game_window.setup()
+            
+            # Get observation and info from the game window
+            observation = self._get_observation_from_game_window()
+            info = {
+                'score': self.game_window.score,
+                'bird_alive': self.game_window.bird.alive
+            }
             return observation, info
         else:
             # Headless mode
