@@ -453,9 +453,53 @@ class FlappyBirdEnv(gym.Env):
     def step(self, action):
         """Execute one time step."""
         if self.render_mode == "human":
-            # In human mode, let the Arcade event loop handle updates
-            # We just pass the action and get the result
-            observation, reward, terminated, truncated, info = self.game_window.step(action)
+            # In human mode, we need to apply the action and update the game directly
+            if self.game_window is None:
+                raise RuntimeError("Game window not initialized")
+                
+            # Apply action to the bird
+            if action == 1:  # Jump
+                self.game_window.bird.jump()
+                
+            # Update game state (using a fixed delta_time)
+            self.game_window.on_update(1/60)
+            
+            # Get observation
+            observation = self._get_observation_from_game_window()
+            
+            # Calculate reward
+            reward = 0.1  # Small survival reward
+            
+            # Additional reward for passing pipes
+            current_score = self.game_window.score
+            if hasattr(self, '_prev_score'):
+                if current_score > self._prev_score:
+                    reward += 10.0  # Reward for passing a pipe
+            self._prev_score = current_score
+            
+            # Penalty for dying
+            if not self.game_window.bird.alive:
+                reward = -10.0
+                
+            # Get info
+            info = {
+                'score': self.game_window.score,
+                'bird_alive': self.game_window.bird.alive
+            }
+            
+            # Check if done
+            terminated = not self.game_window.bird.alive
+            truncated = False
+            
+            # For human rendering, we need to ensure the display is updated
+            if self.render_mode == "human":
+                # Process events and draw
+                self.game_window.switch_to()
+                self.game_window.dispatch_events()
+                self.game_window.clear()
+                self.game_window.on_draw()
+                self.game_window.flip()
+                
             return observation, reward, terminated, truncated, info
         else:
             # Headless mode - update our internal game state
@@ -486,6 +530,38 @@ class FlappyBirdEnv(gym.Env):
             truncated = False
             
             return observation, reward, terminated, truncated, info
+
+    def _get_observation_from_game_window(self):
+        """Get observation from the game window (human mode)."""
+        # Find the next pipe
+        next_pipe = None
+        for pipe in self.game_window.pipes:
+            if pipe.x + pipe.width / 2 > self.game_window.bird.x:
+                next_pipe = pipe
+                break
+                
+        if next_pipe is None:
+            # If no pipe found, create a dummy one far away
+            next_pipe_x = self.game_window.bird.x + SCREEN_WIDTH
+            gap_y = SCREEN_HEIGHT // 2
+        else:
+            next_pipe_x = next_pipe.x
+            gap_y = next_pipe.gap_y
+            
+        # Calculate horizontal distance to next pipe
+        pipe_dist = next_pipe_x - self.game_window.bird.x
+        
+        # Get pipe gap positions
+        pipe_top = gap_y - PIPE_GAP / 2
+        pipe_bottom = gap_y + PIPE_GAP / 2
+        
+        return np.array([
+            self.game_window.bird.y,
+            self.game_window.bird.velocity,
+            pipe_dist,
+            pipe_top,
+            pipe_bottom
+        ], dtype=np.float32)
     
     def render(self):
         """Render the environment."""
