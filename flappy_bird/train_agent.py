@@ -90,7 +90,7 @@ def main():
     except Exception as e:
         logger.error(f"Environment check failed: {e}")
     
-    total_timesteps = 100000
+    total_timesteps = 500000
     
     # Set up the PPO agent
     model = PPO(
@@ -98,43 +98,62 @@ def main():
         env,
         verbose=0,  # We'll handle our own logging
         learning_rate=0.0003,
-        n_steps=2048,
-        batch_size=64,
-        n_epochs=10,
-        gamma=0.99,
+        n_steps=4096,
+        batch_size=128,
+        n_epochs=20,
+        gamma=0.995,
         gae_lambda=0.95,
-        clip_range=0.2,
-        ent_coef=0.01,
+        clip_range=0.1,
+        ent_coef=0.05,
+        policy_kwargs=dict(net_arch=[dict(pi=[256, 256], vf=[256, 256])]),
         # tensorboard_log="./flappy_bird_tensorboard/"
     )
     
     # Create callback instance
     callback = TrainingCallback(total_timesteps=total_timesteps, verbose=1)
-    
+
     # Log training parameters
     logger.info("Starting Flappy Bird training with following parameters:")
-    logger.info(f"Algorithm: [bold]PPO[/]")
-    logger.info(f"Total timesteps: [bold]{total_timesteps:,}[/]")
-    logger.info(f"Learning rate: [bold]{0.0003}[/]")
-    logger.info(f"Gamma: [bold]{0.99}[/]")
+    logger.info(f"Algorithm: PPO")
+    logger.info(f"Total timesteps: {total_timesteps:,}")
+    logger.info(f"Learning rate: {0.0003}")
+    logger.info(f"Gamma: {0.99}")
     device_str = 'GPU' if model.device.type == 'cuda' else 'CPU'
-    logger.info(f"Using [bold]{device_str}[/] for training")
+    logger.info(f"Using {device_str} for training")
     
     # Start timer
+    # Train in phases with automatic saving
+    phases = [
+        (100000, "phase1"),
+        (200000, "phase2"), 
+        (300000, "phase3"),
+        (400000, "phase4"),
+        (500000, "final")
+    ]
+    
     start_time = time.time()
+    current_step = 0
     
     try:
         # Train the agent
         logger.info("Beginning training...")
-        model.learn(
-            total_timesteps=total_timesteps,
-            callback=callback,
-            tb_log_name="PPO"
-        )
-        
-        # Calculate and log training duration
-        training_duration = time.time() - start_time
-        logger.success(f"Training completed in {training_duration/60:.2f} minutes")
+        for target_steps, phase_name in phases:
+            steps_to_train = target_steps - current_step
+            if steps_to_train > 0:
+                logger.info(f"Starting training phase: {phase_name} ({current_step:,} to {target_steps:,} steps)")
+                
+                model.learn(
+                    total_timesteps=steps_to_train,
+                    callback=callback,
+                    tb_log_name=f"PPO_{phase_name}"
+                )
+                
+                # Save phase checkpoint
+                model.save(f"flappy_bird_ppo_{phase_name}")
+                current_step = target_steps
+                
+                elapsed_time = (time.time() - start_time) / 60
+                logger.success(f"Completed {phase_name} after {elapsed_time:.1f} minutes")
         
     except KeyboardInterrupt:
         logger.warning("Training interrupted by user")
