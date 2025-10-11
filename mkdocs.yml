@@ -1,0 +1,28 @@
+site_name: RL Learning Course
+site_description: Learn Reinforcement Learning with code examples
+site_author: Deepak
+repo_url: https://github.com/deepsaia/rll
+repo_name: rll
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+
+nav:
+  - Home: index.md
+  - Contents: contents.md
+  - "Module 00": m00.md
+  - "Module 01": m01.md
