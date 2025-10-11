@@ -16,18 +16,34 @@ theme:
     - search.suggest
     - search.highlight
   palette:
+    # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+    # Auto (fallback to system)
+    - media: "(prefers-color-scheme)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
 
 nav:
   - Home: index.md
   - Contents: contents.md
   - "Module 00": m00.md
   - "Module 01": m01.md
+  - "Mkdocs Deployment Guide": mkdocs_deploy_guide.md
 
 plugins:
   - search
@@ -55,6 +71,24 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/progress.js
+  - javascripts/feedback.js
 
 extra_css:
   - stylesheets/extra.css  # Optional: custom styles
+
+extra:
+  analytics:
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            using our <a href="https://github.com/deepsaia/rll/issues/new?title=[Feedback]+{title}+–+{url}&body=Page:+{url}%0A%0AWhat+was+missing+or+confusing?" target="_blank" rel="noopener">feedback form</a>.
