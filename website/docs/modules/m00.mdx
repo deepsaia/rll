@@ -3,6 +3,9 @@ sidebar_position: 1
 title: "Module 00: Introduction"
 ---
 
+import RandomAgentRewards from '@site/src/components/Charts/m00/RandomAgentRewards';
+import RLAlgorithmLandscape from '@site/src/components/Charts/m00/RLAlgorithmLandscape';
+
 # Module 00: Introduction
 
 In March 2016, a program called AlphaGo defeated Lee Sedol — one of the greatest Go players in history — four games to one.[^1] Go has more possible board positions than atoms in the observable universe. No amount of brute-force search could crack it. Instead, DeepMind used **reinforcement learning**: the program played millions of games against itself, learning from nothing but the rules and the outcome — win or lose.
@@ -334,6 +337,10 @@ You'll see noisy rewards, almost always below 50, with a flat rolling average. O
 
 The rolling average trick is something you'll use constantly. Raw RL rewards are noisy because of the stochastic nature of both the environment and the policy. A single episode can be lucky or unlucky. The rolling average tells you the real story.
 
+Here's what a random agent's reward curve actually looks like — hover over points to see individual episode scores:
+
+<RandomAgentRewards />
+
 ---
 
 ## 9. Capturing Frames (Headless Mode)
@@ -385,6 +392,10 @@ RL Algorithms
 ```
 
 The two big questions that divide RL algorithms are: (1) Do you learn a value function, a policy, or both? (2) Do you try to model how the environment works, or just learn from raw experience?
+
+Here's an interactive view — each bubble is an algorithm you'll learn, positioned by how sample-efficient it is vs. how well it performs. Click on any point for details:
+
+<RLAlgorithmLandscape />
 
 David Silver's RL lecture series at UCL[^18] is the best video companion for this course. If you're the kind of person who learns from lectures, start watching alongside Module 01.
 
