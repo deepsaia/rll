@@ -1,17 +1,15 @@
-name: Deploy MkDocs to GitHub Pages
+name: Deploy Docusaurus to GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-# Required permissions for GitHub Pages deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -26,24 +24,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.12'  # Match your pyproject.toml
+          node-version: 20
+          cache: yarn
+          cache-dependency-path: website/yarn.lock
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
+      - name: Install dependencies
+        working-directory: website
+        run: yarn install --frozen-lockfile
 
-      - name: Install project dependencies
-        run: uv sync --frozen  # Installs all deps from pyproject.toml + uv.lock
-
-      - name: Build MkDocs site
-        run: uv run mkdocs build --strict
+      - name: Build Docusaurus site
+        working-directory: website
+        run: yarn build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: website/build
 
       - name: Deploy to GitHub Pages
         id: deployment

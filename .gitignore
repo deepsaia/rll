@@ -6,11 +6,16 @@ dist/
 wheels/
 *.egg-info
 
-# local build
+# Local build
 site/
 
 # Virtual environments
 .venv
+
+# Docusaurus
+website/node_modules/
+website/build/
+website/.docusaurus/
 
 # os files
 *.zip
