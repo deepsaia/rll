@@ -1,0 +1,227 @@
+/**
+ * RL Learning Course — Custom CSS
+ * Indigo-based color scheme.
+ */
+
+:root {
+  --ifm-color-primary: #3f51b5;
+  --ifm-color-primary-dark: #3849a2;
+  --ifm-color-primary-darker: #354599;
+  --ifm-color-primary-darkest: #2c397e;
+  --ifm-color-primary-light: #4f5fc0;
+  --ifm-color-primary-lighter: #5766c3;
+  --ifm-color-primary-lightest: #7280cf;
+  --ifm-code-font-size: 95%;
+  --ifm-font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-weight: 700;
+  --ifm-line-height-base: 1.65;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #7986cb;
+  --ifm-color-primary-dark: #6273c1;
+  --ifm-color-primary-darker: #5769bc;
+  --ifm-color-primary-darkest: #3f51a5;
+  --ifm-color-primary-light: #9099d5;
+  --ifm-color-primary-lighter: #9ba3da;
+  --ifm-color-primary-lightest: #bbc1e6;
+  --ifm-background-color: #1a1a2e;
+  --ifm-background-surface-color: #1e1e34;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* ---- Global typography ---- */
+
+h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Navbar ---- */
+
+.navbar {
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(26, 26, 46, 0.85);
+}
+
+.navbar__title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Sidebar ---- */
+
+.theme-doc-sidebar-container {
+  border-right: none !important;
+}
+
+.menu__link {
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  background: rgba(121, 134, 203, 0.2);
+  color: var(--ifm-color-primary);
+}
+
+.menu__link:hover:not(.menu__link--active) {
+  background: var(--ifm-color-emphasis-100);
+}
+
+/* ---- Doc page content ---- */
+
+.markdown > h1:first-child {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.markdown > h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--ifm-color-emphasis-200);
+}
+
+.markdown > h3 {
+  margin-top: 2rem;
+}
+
+/* ---- Code blocks ---- */
+
+.prism-code {
+  border-radius: 10px !important;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .prism-code {
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+div[class*='codeBlockTitle'] {
+  border-radius: 10px 10px 0 0 !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Tables ---- */
+
+table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+table thead tr {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] table thead tr {
+  background: var(--ifm-color-emphasis-200);
+}
+
+table th {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+table td,
+table th {
+  border: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0.65rem 1rem;
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table tbody tr:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ---- Task list checkboxes ---- */
+
+article ul li input[type='checkbox'] {
+  cursor: pointer;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.45em;
+  accent-color: var(--ifm-color-primary);
+  border-radius: 4px;
+}
+
+/* ---- Admonitions ---- */
+
+.theme-admonition {
+  border-radius: 10px;
+  border-left-width: 4px;
+}
+
+/* ---- Footer ---- */
+
+.footer {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.footer__title {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+/* ---- Smooth scrolling ---- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---- Selection color ---- */
+
+::selection {
+  background: rgba(63, 81, 181, 0.25);
+}
+
+[data-theme='dark'] ::selection {
+  background: rgba(121, 134, 203, 0.3);
+}
+
+/* ---- Links ---- */
+
+.markdown a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.markdown a:hover {
+  text-decoration-thickness: 2px;
+}
