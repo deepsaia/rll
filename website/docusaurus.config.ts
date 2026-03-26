@@ -6,7 +6,7 @@ import rehypeKatex from 'rehype-katex';
 
 const config: Config = {
   title: 'RL Learning Course',
-  tagline: 'From Zero to RL Mastery — with code at every step',
+  tagline: 'From Zero to RL Mastery - with code at every step',
   favicon: 'img/favicon.svg',
 
   future: {

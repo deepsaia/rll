@@ -7,7 +7,7 @@ import styles from './index.module.css';
 export default function Home(): React.JSX.Element {
   return (
     <Layout
-      title="Reinforcement Learning — A Learning Journey"
+      title="Reinforcement Learning - A Learning Journey"
       description="A hands-on, code-first guide to Reinforcement Learning"
     >
       <HomepageHeader />
@@ -17,7 +17,7 @@ export default function Home(): React.JSX.Element {
             <div className={styles.feature}>
               <div className={styles.featureIcon}>&#x1F4BB;</div>
               <h3>Code-First</h3>
-              <p>Every concept has runnable Python. No hand-waving — you'll implement RL algorithms from scratch.</p>
+              <p>Every concept has runnable Python. No hand-waving - you'll implement RL algorithms from scratch.</p>
             </div>
             <div className={styles.feature}>
               <div className={styles.featureIcon}>&#x1F4D0;</div>
@@ -27,7 +27,7 @@ export default function Home(): React.JSX.Element {
             <div className={styles.feature}>
               <div className={styles.featureIcon}>&#x1F30D;</div>
               <h3>Real-World Examples</h3>
-              <p>From game AI to robotics to LLM alignment — see how RL solves actual problems.</p>
+              <p>From game AI to robotics to LLM alignment - see how RL solves actual problems.</p>
             </div>
           </div>
         </section>

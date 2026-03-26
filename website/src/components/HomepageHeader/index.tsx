@@ -8,7 +8,7 @@ export default function HomepageHeader(): React.JSX.Element {
         <div className={styles.heroIcon}>&#x1F916;</div>
         <h1 className={styles.heroTitle}>Reinforcement Learning</h1>
         <p className={styles.heroSubtitle}>
-          A hands-on, code-first guide — from bandits to PPO and beyond
+          A hands-on, code-first guide - from bandits to PPO and beyond
         </p>
         <div className={styles.heroButtons}>
           <a className={styles.heroBtnPrimary} href="course/modules/m00">

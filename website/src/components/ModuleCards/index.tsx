@@ -16,7 +16,7 @@ const modules: ModuleInfo[] = [
   {id: 'm04', title: 'MC & TD Methods', description: 'Monte Carlo, SARSA, Q-learning, eligibility traces', icon: '\u{1F3AF}'},
   {id: 'm05', title: 'Function Approximation & DQN', description: 'Neural networks for value functions, replay buffers', icon: '\u{1F9E0}'},
   {id: 'm06', title: 'Policy Gradients', description: 'REINFORCE, actor-critic, advantage estimation', icon: '\u{1F4C8}'},
-  {id: 'm07', title: 'Modern Deep RL', description: 'PPO, SAC, TD3 — the algorithms that actually work', icon: '\u{1F680}'},
+  {id: 'm07', title: 'Modern Deep RL', description: 'PPO, SAC, TD3 - the algorithms that actually work', icon: '\u{1F680}'},
   {id: 'm08', title: 'Reward Design & Debugging', description: 'Reward shaping, diagnostics, why your agent is broken', icon: '\u{1F527}'},
   {id: 'm09', title: 'Partial Observability', description: 'POMDPs, recurrent policies, generalization', icon: '\u{1F576}\u{FE0F}'},
   {id: 'm10', title: 'Model-Based RL', description: 'World models, planning, Dyna, MuZero', icon: '\u{1F30D}'},
@@ -24,7 +24,7 @@ const modules: ModuleInfo[] = [
   {id: 'm12', title: 'Multi-Agent RL', description: 'Cooperation, competition, communication', icon: '\u{1F465}'},
   {id: 'm13', title: 'Sim-to-Real & Production', description: 'Domain randomization, deployment, safety', icon: '\u{1F3ED}'},
   {id: 'm14', title: 'Paper Reproduction', description: 'Pick a paper, reproduce it, understand the gaps', icon: '\u{1F4DD}'},
-  {id: 'm15', title: 'Capstone', description: 'Your portfolio project — design, build, evaluate', icon: '\u{1F3C6}'},
+  {id: 'm15', title: 'Capstone', description: 'Your portfolio project - design, build, evaluate', icon: '\u{1F3C6}'},
 ];
 
 export default function ModuleCards(): React.JSX.Element {

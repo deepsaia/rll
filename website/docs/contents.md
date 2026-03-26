@@ -19,10 +19,10 @@ title: Course Contents
 
 ## Recommended resources
 
-* **Sutton & Barto — *Reinforcement Learning: An Introduction*** — the standard theoretical text.
-* **David Silver's RL course** — excellent lecture series mapping to Sutton & Barto.
-* **OpenAI Spinning Up in Deep RL** — practical, tutorial-style with clean PyTorch code.
-* **Stable-Baselines3 (SB3)** — production-quality implementations for experiments and baselines.
+* **Sutton & Barto - *Reinforcement Learning: An Introduction*** - the standard theoretical text.
+* **David Silver's RL course** - excellent lecture series mapping to Sutton & Barto.
+* **OpenAI Spinning Up in Deep RL** - practical, tutorial-style with clean PyTorch code.
+* **Stable-Baselines3 (SB3)** - production-quality implementations for experiments and baselines.
 
 ---
 
@@ -38,12 +38,12 @@ title: Course Contents
 
 | Timeframe | Modules | Focus |
 |-----------|---------|-------|
-| Month 1 | 00–03 | Foundations, bandits, MDPs, DP |
-| Month 2 | 04–06 | MC, TD, DQN, policy gradients |
-| Month 3 | 07–08 | Modern deep RL, debugging |
-| Month 4 | 09–11 | POMDPs, model-based, RLHF |
-| Month 5 | 12–13 | Multi-agent, sim-to-real |
-| Month 6 | 14–15 | Paper reproduction, capstone |
+| Month 1 | 00-03 | Foundations, bandits, MDPs, DP |
+| Month 2 | 04-06 | MC, TD, DQN, policy gradients |
+| Month 3 | 07-08 | Modern deep RL, debugging |
+| Month 4 | 09-11 | POMDPs, model-based, RLHF |
+| Month 5 | 12-13 | Multi-agent, sim-to-real |
+| Month 6 | 14-15 | Paper reproduction, capstone |
 
 For real research-level mastery, expect 12+ months of focused work (reading papers + contributing code).
 

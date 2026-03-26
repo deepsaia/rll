@@ -3,18 +3,18 @@ sidebar_position: 1
 title: Welcome
 ---
 
-# Reinforcement Learning — A Learning Journey
+# Reinforcement Learning - A Learning Journey
 
 Welcome! This site is a hands-on, code-first guide to Reinforcement Learning. Every concept comes with runnable Python, real-world context, and just enough math to know what's actually going on.
 
-Whether you're here to understand Q-learning, train a PPO agent, or figure out why your reward curve looks like a heart-rate monitor during a horror movie — you're in the right place.
+Whether you're here to understand Q-learning, train a PPO agent, or figure out why your reward curve looks like a heart-rate monitor during a horror movie - you're in the right place.
 
 ## How to use this course
 
 1. Start with [Module 00: Setup & Tools](/course/modules/m00) to get your environment running.
-2. Follow the modules in order — each one builds on the last.
+2. Follow the modules in order - each one builds on the last.
 3. Run the code. Break the code. Fix the code. That's where learning happens.
-4. Check the boxes on exercises as you complete them — your progress is saved in your browser.
+4. Check the boxes on exercises as you complete them - your progress is saved in your browser.
 
 ## Course Modules
 

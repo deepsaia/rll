@@ -1,8 +1,8 @@
-# CLAUDE.md — Project Guide for RL Learning (rll)
+# CLAUDE.md - Project Guide for RL Learning (rll)
 
 ## Project Overview
 
-This is a **hands-on Reinforcement Learning course** — a structured, module-by-module curriculum that takes learners from zero to expertise in RL. It includes a documentation website (deployed to GitHub Pages) and runnable Python code for every concept.
+This is a **hands-on Reinforcement Learning course** - a structured, module-by-module curriculum that takes learners from zero to expertise in RL. It includes a documentation website (deployed to GitHub Pages) and runnable Python code for every concept.
 
 - **Repo**: `deepsaia/rll`
 - **Live site**: https://deepsaia.github.io/rll/
@@ -41,7 +41,7 @@ Code for each module lives in a directory named after the module (e.g., `m00/`, 
 
 ### Tone
 - **Fun to read, not boring.** This is not a dry textbook. Write with personality.
-- Use humor where it lands naturally — not forced, not on every page, but enough that a reader smiles.
+- Use humor where it lands naturally - not forced, not on every page, but enough that a reader smiles.
 - Conversational but technically precise. Explain hard things simply without dumbing them down.
 - Analogies are encouraged. A good analogy is worth a thousand equations.
 
@@ -49,7 +49,7 @@ Code for each module lives in a directory named after the module (e.g., `m00/`, 
 - Every concept must be illustrated with **ample code examples** that actually run.
 - Some examples should be funny or memorable (a squirrel hoarding acorns as a bandit problem, etc.).
 - Regularly draw examples from **real-world industries**: Automobile, Healthcare, Insurance, Finance, Robotics, Consumer Products, Travel, Hospitality, and others.
-- Not every example needs to be from industry — mix in games, toy problems, and absurd scenarios to keep things varied.
+- Not every example needs to be from industry - mix in games, toy problems, and absurd scenarios to keep things varied.
 - When using industry examples, be specific enough that a domain expert would nod, not so jargon-heavy that a newcomer drowns.
 
 ### Depth
@@ -60,13 +60,13 @@ Code for each module lives in a directory named after the module (e.g., `m00/`, 
 
 ### Structure per Module
 Each module page should follow this structure:
-1. **Learning Objectives** — what the reader will be able to do after this module
-2. **Concept Explanation** — theory with analogies and visuals
-3. **Code Examples** — runnable, well-commented Python
-4. **Real-World Connections** — industry examples showing where this applies
-5. **Common Pitfalls** — what goes wrong and how to debug it
-6. **Exercises** — with starter code and test cases where applicable
-7. **Key Takeaways** — concise summary
+1. **Learning Objectives** - what the reader will be able to do after this module
+2. **Concept Explanation** - theory with analogies and visuals
+3. **Code Examples** - runnable, well-commented Python
+4. **Real-World Connections** - industry examples showing where this applies
+5. **Common Pitfalls** - what goes wrong and how to debug it
+6. **Exercises** - with starter code and test cases where applicable
+7. **Key Takeaways** - concise summary
 
 ---
 
