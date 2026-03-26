@@ -1,0 +1,57 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  margin: -0.5rem -0.5rem 2rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 50%, #e8eaf6 100%);
+  border: 1px solid #c5cae9;
+}
+
+[data-theme='dark'] .banner {
+  background: linear-gradient(135deg, #1a1a3e 0%, #252560 50%, #1a1a3e 100%);
+  border-color: #303070;
+}
+
+.bannerIcon {
+  font-size: 2.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.bannerText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.bannerLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+}
+
+.bannerTitle {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--ifm-heading-color);
+}
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+  .bannerIcon {
+    font-size: 2.25rem;
+  }
+  .bannerTitle {
+    font-size: 1.15rem;
+  }
+}

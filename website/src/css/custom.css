@@ -225,3 +225,157 @@ html {
 .markdown a:hover {
   text-decoration-thickness: 2px;
 }
+
+/* ---- Learning Objectives (numbered lists after h2 containing "Learning") ---- */
+
+.markdown > h2#learning-objectives + ol,
+.markdown > h2#learning-objectives + p + ol {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.25rem 2.5rem;
+  list-style: none;
+  counter-reset: objectives;
+}
+
+.markdown > h2#learning-objectives + ol li,
+.markdown > h2#learning-objectives + p + ol li {
+  counter-increment: objectives;
+  position: relative;
+  padding: 0.4rem 0 0.4rem 0.25rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.markdown > h2#learning-objectives + ol li:last-child,
+.markdown > h2#learning-objectives + p + ol li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.markdown > h2#learning-objectives + ol li::before,
+.markdown > h2#learning-objectives + p + ol li::before {
+  content: counter(objectives);
+  position: absolute;
+  left: -2rem;
+  top: 0.4rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Milestone Checklist section ---- */
+
+.markdown > h2#milestone-checklist + ul {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 0 10px 10px 0;
+  padding: 1rem 1.25rem;
+  list-style: none;
+}
+
+.markdown > h2#milestone-checklist + ul li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.markdown > h2#milestone-checklist + ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ---- Exercises section ---- */
+
+.markdown > h2#exercises + ol {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.25rem 2.5rem;
+}
+
+.markdown > h2#exercises + ol > li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.markdown > h2#exercises + ol > li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ---- References / Footnotes section ---- */
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--ifm-color-emphasis-200);
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .footnotes {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.footnotes ol {
+  padding-left: 1.5rem;
+}
+
+.footnotes li {
+  padding: 0.3rem 0;
+}
+
+.footnotes a {
+  word-break: break-all;
+}
+
+/* Superscript reference links */
+sup a {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  padding: 0 0.15em;
+}
+
+sup a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Horizontal rules as section dividers ---- */
+
+.markdown hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ifm-color-emphasis-300),
+    transparent
+  );
+  margin: 2.5rem 0;
+}
+
+/* ---- Blockquote styling ---- */
+
+.markdown blockquote {
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 0 8px 8px 0;
+  background: var(--ifm-background-surface-color);
+  padding: 1rem 1.25rem;
+  font-style: italic;
+}
+
+/* ---- Inline code ---- */
+
+.markdown code {
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+  font-size: 0.9em;
+}
