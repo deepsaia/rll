@@ -16,7 +16,7 @@ This is a **hands-on Reinforcement Learning course** — a structured, module-by
 
 | Module | Topic |
 |--------|-------|
-| 00 | Setup & Tools |
+| 00 | Introduction |
 | 01 | Math Foundations for RL |
 | 02 | Multi-Armed Bandits & Exploration |
 | 03 | MDPs, Bellman Equations & Dynamic Programming |

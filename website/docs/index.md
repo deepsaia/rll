@@ -20,7 +20,7 @@ Whether you're here to understand Q-learning, train a PPO agent, or figure out w
 
 | Module | Topic |
 |--------|-------|
-| [00](/course/modules/m00) | Setup & Tools |
+| [00](/course/modules/m00) | Introduction |
 | [01](/course/modules/m01) | Math Foundations for RL |
 | [02](/course/modules/m02) | Multi-Armed Bandits & Exploration |
 | [03](/course/modules/m03) | MDPs, Bellman Equations & Dynamic Programming |

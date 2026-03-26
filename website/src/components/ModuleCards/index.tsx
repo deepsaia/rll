@@ -9,7 +9,7 @@ interface ModuleInfo {
 }
 
 const modules: ModuleInfo[] = [
-  {id: 'm00', title: 'Setup & Tools', description: 'Install libraries, run your first agent, visualize training', icon: '\u{1F6E0}\u{FE0F}'},
+  {id: 'm00', title: 'Introduction', description: 'Why RL matters, setup your lab, run your first agent', icon: '\u{1F6E0}\u{FE0F}'},
   {id: 'm01', title: 'Math Foundations', description: 'Probability, linear algebra, calculus for RL', icon: '\u{1F4D0}'},
   {id: 'm02', title: 'Multi-Armed Bandits', description: 'Exploration vs exploitation, UCB, Thompson sampling', icon: '\u{1F3B0}'},
   {id: 'm03', title: 'MDPs & Dynamic Programming', description: 'Bellman equations, value/policy iteration', icon: '\u{1F4CA}'},
