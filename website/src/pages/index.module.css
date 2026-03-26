@@ -1,0 +1,146 @@
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Feature cards section */
+.features {
+  padding: 3rem 0;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.feature {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feature:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .feature:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.5;
+  margin: 0;
+}
+
+[data-theme='dark'] .feature p {
+  color: var(--ifm-color-emphasis-500);
+}
+
+/* Modules section */
+.modules {
+  padding: 3rem 0 4rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-700);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+[data-theme='dark'] .sectionSubtitle {
+  color: var(--ifm-color-emphasis-500);
+}
+
+/* CTA section */
+.cta {
+  padding: 3rem 0 4rem;
+}
+
+.ctaInner {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+}
+
+[data-theme='dark'] .ctaInner {
+  background: linear-gradient(135deg, #1a1a3e 0%, #1e2264 100%);
+}
+
+.ctaInner h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.ctaInner p {
+  font-size: 1.05rem;
+  color: var(--ifm-color-emphasis-700);
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.5;
+}
+
+[data-theme='dark'] .ctaInner p {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(63, 81, 181, 0.35);
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 0 1.25rem;
+  }
+  .featureGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+}
